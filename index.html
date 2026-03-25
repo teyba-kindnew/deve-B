@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Database Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Employee Database</p>
+        <h1>Employee Management System</h1>
+      </div>
+      <button id="addEmployeeBtn" class="primary-btn" type="button">Add Employee</button>
+    </header>
+
+    <main class="dashboard">
+      <section class="panel form-panel">
+        <h2>Add New Employee</h2>
+        <form id="employeeForm" class="employee-form">
+          <div class="input-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" name="firstName" type="text" placeholder="Enter first name" required>
+          </div>
+          <div class="input-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" name="lastName" type="text" placeholder="Enter last name" required>
+          </div>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="Enter email address" required>
+          </div>
+          <div class="input-group">
+            <label for="contactNumber">Contact Number</label>
+            <input id="contactNumber" name="contactNumber" type="tel" placeholder="Enter contact number" required>
+          </div>
+          <div class="input-group">
+            <label for="dateOfBirth">Date of Birth</label>
+            <input id="dateOfBirth" name="dateOfBirth" type="date" required>
+          </div>
+          <div class="input-group">
+            <label for="salary">Salary</label>
+            <input id="salary" name="salary" type="number" min="0" placeholder="Enter salary" required>
+          </div>
+          <div class="input-group">
+            <label for="profilePic">Profile Picture URL</label>
+            <input id="profilePic" name="profilePic" type="url" placeholder="Optional image URL">
+          </div>
+          <button class="submit-btn" type="submit">Save Employee</button>
+        </form>
+      </section>
+
+      <section class="panel list-panel">
+        <div class="section-heading">
+          <h2>Employee List</h2>
+          <span id="employeeCount" class="count-badge">0 employees</span>
+        </div>
+        <div id="employeeList" class="employee-list"></div>
+      </section>
+
+      <aside class="panel details-panel">
+        <h2>Employee Details</h2>
+        <div id="employeeDetails" class="employee-details">
+          <p class="empty-state">Select an employee to view details.</p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
