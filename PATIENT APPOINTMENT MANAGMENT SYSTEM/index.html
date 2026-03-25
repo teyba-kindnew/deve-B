@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Appointment System - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Selection Page -->
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <i class="fas fa-hospital-alt"></i>
+                <h1>Patient Appointment</h1>
+                <p>Hospital Appointment Management System</p>
+            </div>
+
+            <div class="role-selection">
+                <h3>Select Your Role</h3>
+                <div class="role-cards">
+                    <div class="role-card" onclick="showLoginForm('admin')">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Admin</h4>
+                        <p>System Administrator</p>
+                    </div>
+                    <div class="role-card" onclick="showLoginForm('doctor')">
+                        <i class="fas fa-user-md"></i>
+                        <h4>Doctor</h4>
+                        <p>Medical Professional</p>
+                    </div>
+                    <div class="role-card" onclick="showLoginForm('patient')">
+                        <i class="fas fa-user"></i>
+                        <h4>Patient</h4>
+                        <p>Book Appointment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form (Hidden Initially) -->
+            <div id="login-form-container" style="display: none;">
+                <button class="back-btn" onclick="backToRoleSelection()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                
+                <form id="login-form" class="login-form">
+                    <h3 id="form-title">Admin Login</h3>
+                    
+                    <div class="form-group">
+                        <div class="input-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" placeholder="Username" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    
+                    
+                    <button type="submit" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                </form>
+
+                <!-- Patient Registration Link -->
+                <div id="register-link" style="display: none; text-align: center; margin-top: 1rem;">
+                    <p>Don't have an account? <a href="patient-register.html" style="color: #667eea; text-decoration: none; font-weight: 600;">Register Here</a></p>
+                </div>
+
+                <div class="login-footer">
+                    <p id="demo-credentials">Demo: admin / admin123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Services -->
+    <script src="js/repositories/BaseRepository.js"></script>
+    <script src="js/repositories/DoctorRepository.js"></script>
+    <script src="js/repositories/PatientRepository.js"></script>
+    <script src="js/repositories/AppointmentRepository.js"></script>
+    <script src="js/repositories/ScheduleRepository.js"></script>
+    
+    <script src="js/services/ValidationService.js"></script>
+    <script src="js/services/AuthenticationService.js"></script>
+    <script src="js/services/DoctorService.js"></script>
+    <script src="js/services/PatientService.js"></script>
+    <script src="js/services/ScheduleService.js"></script>
+    <script src="js/services/AppointmentService.js"></script>
+    
+    <script src="js/app.js"></script>
+    
+    <script>
+        let selectedRole = '';
+
+        function showLoginForm(role) {
+            selectedRole = role;
+            document.querySelector('.role-selection').style.display = 'none';
+            document.getElementById('login-form-container').style.display = 'block';
+            
+            const formTitle = document.getElementById('form-title');
+            const demoCredentials = document.getElementById('demo-credentials');
+            const registerLink = document.getElementById('register-link');
+            
+            if (role === 'admin') {
+                formTitle.textContent = 'Admin Login';
+                demoCredentials.textContent = 'Demo: admin / admin123';
+                registerLink.style.display = 'none';
+            } else if (role === 'doctor') {
+                formTitle.textContent = 'Doctor Login';
+                demoCredentials.textContent = 'Demo: doctor / doctor123';
+                registerLink.style.display = 'none';
+            } else if (role === 'patient') {
+                formTitle.textContent = 'Patient Login';
+                demoCredentials.textContent = 'Demo: patient / patient123';
+                registerLink.style.display = 'block';
+            }
+        }
+
+        function backToRoleSelection() {
+            document.querySelector('.role-selection').style.display = 'block';
+            document.getElementById('login-form-container').style.display = 'none';
+            document.getElementById('login-form').reset();
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Use AuthenticationService
+            const result = AppServices.auth.login(username, password, selectedRole);
+            
+            if (result.success) {
+                // Redirect based on role
+                if (selectedRole === 'admin') {
+                    window.location.href = 'admin-dashboard.html';
+                } else if (selectedRole === 'doctor') {
+                    window.location.href = 'doctor-dashboard.html';
+                } else if (selectedRole === 'patient') {
+                    window.location.href = 'patient-dashboard.html';
+                }
+            } else {
+                alert(result.error.message || 'Invalid credentials! Please use demo credentials.');
+            }
+        });
+    </script>
+</body>
+</html>

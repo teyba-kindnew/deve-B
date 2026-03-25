@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - MediCare</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-hospital-alt"></i>
+                    <span>WCHPAMS</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active" data-section="dashboard">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="doctors">
+                            <i class="fas fa-user-md"></i>
+                            <span>Find Doctors</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="book-appointment">
+                            <i class="fas fa-calendar-plus"></i>
+                            <span>Book Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="my-appointments">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>My Appointments</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="profile">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">Hikma</span>
+                        <span class="user-role">Patient</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </aside>
+ 
+       <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="header-btn">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">2</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-calendar-check"></i>
+                            <div class="stat-info">
+                                <h3>3</h3>
+                                <p>Upcoming Appointments</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <h3>1</h3>
+                                <p>Pending Approval</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="stat-info">
+                                <h3>12</h3>
+                                <p>Completed Visits</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-user-md"></i>
+                            <div class="stat-info">
+                                <h3>24</h3>
+                                <p>Available Doctors</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <h3>Upcoming Appointments</h3>
+                            <div class="appointment-list">
+                                <div class="appointment-item-mini">
+                                    <div>
+                                        <strong>Dr.Teyba</strong>
+                                        <p>Cardiology - Dec 5, 2024 at 10:00 AM</p>
+                                    </div>
+                                    <span class="status confirmed">Confirmed</span>
+                                </div>
+                                <div class="appointment-item-mini">
+                                    <div>
+                                        <strong>Dr.Fayza</strong>
+                                        <p>Pediatrics - Dec 8, 2024 at 02:00 PM</p>
+                                    </div>
+                                    <span class="status pending">Pending</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block">View All Appointments</button>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <h3>Quick Actions</h3>
+                            <div class="quick-actions">
+                                <button class="action-btn" onclick="goToSection('book-appointment')">
+                                    <i class="fas fa-calendar-plus"></i>
+                                    <span>Book Appointment</span>
+                                </button>
+                                <button class="action-btn" onclick="goToSection('doctors')">
+                                    <i class="fas fa-search"></i>
+                                    <span>Find Doctors</span>
+                                </button>
+                                <button class="action-btn" onclick="goToSection('my-appointments')">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <span>My Appointments</span>
+                                </button>
+                                <button class="action-btn" onclick="goToSection('profile')">
+                                    <i class="fas fa-user"></i>
+                                    <span>My Profile</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+  
+              <!-- Find Doctors Section -->
+                <section id="doctors" class="section">
+                    <div class="section-header">
+                        <h2>Find Doctors</h2>
+                        <div class="filters">
+                            <select class="filter-select">
+                                <option value="">All Specializations</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="dermatology">Dermatology</option>
+                            </select>
+                            <input type="text" class="search-input" placeholder="Search doctors...">
+                        </div>
+                    </div>
+
+                    <div class="doctors-grid">
+                        <div class="doctor-card">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <h4>Dr. Teyba</h4>
+                                <p class="doctor-specialty">Cardiologist</p>
+                                <p><i class="fas fa-star"></i> 4.8 (120 reviews)</p>
+                                <p><i class="fas fa-briefcase"></i> 15 years experience</p>
+                                <p><i class="fas fa-phone"></i> +251977665588</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary btn-block" onclick="viewDoctorSchedule('Dr. John Smith')">
+                                    <i class="fas fa-calendar"></i> View Schedule
+                                </button>
+                                <button class="btn btn-success btn-block" onclick="bookWithDoctor('Dr. John Smith')">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <h4>Dr. Fayza</h4>
+                                <p class="doctor-specialty">Pediatrician</p>
+                                <p><i class="fas fa-star"></i> 4.9 (95 reviews)</p>
+                                <p><i class="fas fa-briefcase"></i> 12 years experience</p>
+                                <p><i class="fas fa-phone"></i> +251944336644</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary btn-block" onclick="viewDoctorSchedule('Dr. Sarah Johnson')">
+                                    <i class="fas fa-calendar"></i> View Schedule
+                                </button>
+                                <button class="btn btn-success btn-block" onclick="bookWithDoctor('Dr. Sarah Johnson')">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="doctor-card">
+                            <div class="doctor-avatar">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="doctor-info">
+                                <h4>Dr. Nosiba</h4>
+                                <p class="doctor-specialty">Orthopedic Surgeon</p>
+                                <p><i class="fas fa-star"></i> 4.7 (88 reviews)</p>
+                                <p><i class="fas fa-briefcase"></i> 18 years experience</p>
+                                <p><i class="fas fa-phone"></i> +251977443522</p>
+                            </div>
+                            <div class="doctor-actions">
+                                <button class="btn btn-primary btn-block" onclick="viewDoctorSchedule('Dr. Michael Davis')">
+                                    <i class="fas fa-calendar"></i> View Schedule
+                                </button>
+                                <button class="btn btn-success btn-block" onclick="bookWithDoctor('Dr. Michael Davis')">
+                                    <i class="fas fa-calendar-plus"></i> Book Appointment
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+     
+           <!-- Book Appointment Section -->
+                <section id="book-appointment" class="section">
+                    <div class="booking-container">
+                        <div class="booking-header">
+                            <h2>Book New Appointment</h2>
+                            <p>Schedule your visit with our doctors</p>
+                        </div>
+                        
+                        <div class="booking-form-container">
+                            <form id="booking-form" class="booking-form">
+                                <div class="form-step active">
+                                    <h3>Select Doctor & Date</h3>
+                                    
+                                    <div class="form-group">
+                                        <label>Select Doctor *</label>
+                                        <select id="doctor-select" required>
+                                            <option value="">Choose a doctor</option>
+                                            <option value="dr-smith">Dr. Teyba - Cardiology</option>
+                                            <option value="dr-johnson">Dr. Fayza - Pediatrics</option>
+                                            <option value="dr-davis">Dr. Nosiba- Orthopedics</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Appointment Date *</label>
+                                            <input type="date" id="appointment-date" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Preferred Time *</label>
+                                            <select id="appointment-time" required>
+                                                <option value="">Select time</option>
+                                                <option value="09:00">09:00 AM</option>
+                                                <option value="10:00">10:00 AM</option>
+                                                <option value="11:00">11:00 AM</option>
+                                                <option value="14:00">02:00 PM</option>
+                                                <option value="15:00">03:00 PM</option>
+                                                <option value="16:00">04:00 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Reason for Visit *</label>
+                                        <textarea id="visit-reason" rows="3" required placeholder="Describe your symptoms or reason for visit..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Additional Notes (Optional)</label>
+                                        <textarea id="additional-notes" rows="2" placeholder="Any additional information..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-calendar-check"></i> Book Appointment
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div class="booking-sidebar">
+                                <div class="info-card">
+                                    <h4><i class="fas fa-info-circle"></i> Important Information</h4>
+                                    <ul>
+                                        <li>Appointments are subject to doctor approval</li>
+                                        <li>You will receive confirmation via email</li>
+                                        <li>Please arrive 10 minutes early</li>
+                                        <li>Bring your ID and insurance card</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="info-card">
+                                    <h4><i class="fas fa-clock"></i> Working Hours</h4>
+                                    <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
+                                    <p>Saturday: 9:00 AM - 1:00 PM</p>
+                                    <p>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+   
+             <!-- My Appointments Section -->
+                <section id="my-appointments" class="section">
+                    <div class="section-header">
+                        <h2>My Appointments</h2>
+                        <div class="filters">
+                            <select class="filter-select">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="confirmed">Confirmed</option>
+                                <option value="completed">Completed</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="appointments-list">
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <div>
+                                    <h4>Dr. Teyba - Cardiology</h4>
+                                    <p><i class="fas fa-calendar"></i> December 5, 2024 at 10:00 AM</p>
+                                </div>
+                                <span class="status confirmed">Confirmed</span>
+                            </div>
+                            <div class="appointment-body">
+                                <p><i class="fas fa-map-marker-alt"></i> Room 301, Building A</p>
+                                <p><i class="fas fa-notes-medical"></i> Regular heart checkup</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i> View Details</button>
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <div>
+                                    <h4>Dr. Fayza - Pediatrics</h4>
+                                    <p><i class="fas fa-calendar"></i> December 8, 2024 at 02:00 PM</p>
+                                </div>
+                                <span class="status pending">Pending Approval</span>
+                            </div>
+                            <div class="appointment-body">
+                                <p><i class="fas fa-clock"></i> Waiting for doctor confirmation</p>
+                                <p><i class="fas fa-notes-medical"></i> Child vaccination</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i> View Details</button>
+                                <button class="btn btn-danger btn-sm"><i class="fas fa-times"></i> Cancel</button>
+                            </div>
+                        </div>
+
+                        <div class="appointment-card">
+                            <div class="appointment-header">
+                                <div>
+                                    <h4>Dr. Nosiba - Orthopedics</h4>
+                                    <p><i class="fas fa-calendar"></i> November 28, 2024 at 11:00 AM</p>
+                                </div>
+                                <span class="status completed">Completed</span>
+                            </div>
+                            <div class="appointment-body">
+                                <p><i class="fas fa-check-circle"></i> Visit completed successfully</p>
+                                <p><i class="fas fa-notes-medical"></i> Knee pain consultation</p>
+                            </div>
+                            <div class="appointment-actions">
+                                <button class="btn btn-secondary btn-sm"><i class="fas fa-eye"></i> View Details</button>
+                                <button class="btn btn-primary btn-sm"><i class="fas fa-star"></i> Rate Visit</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- My Profile Section -->
+                <section id="profile" class="section">
+                    <div class="section-header">
+                        <h2>My Profile</h2>
+                    </div>
+
+                    <div class="profile-container">
+                        <div class="profile-card">
+                            <div class="profile-avatar-large">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3>Hikma</h3>
+                            <p class="profile-specialty">Patient ID: #P001</p>
+                            
+                            <div class="profile-details">
+                                <div class="profile-item">
+                                    <label>Full Name:</label>
+                                    <span>John Doe</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Age:</label>
+                                    <span>35 years</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Gender:</label>
+                                    <span>Male</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Email:</label>
+                                    <span>hikma@gmail.com</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Phone:</label>
+                                    <span>+251988667434</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Address:</label>
+                                    <span>123 Main St, City, State</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Medical History:</label>
+                                    <span>Hypertension, Diabetes</span>
+                                </div>
+                                <div class="profile-item">
+                                    <label>Account Status:</label>
+                                    <span class="badge badge-success">Approved</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary">Edit Profile</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        function goToSection(section) {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+        }
+
+        function viewDoctorSchedule(doctorName) {
+            alert(`Viewing schedule for ${doctorName} - Will be implemented with backend`);
+        }
+
+        function bookWithDoctor(doctorName) {
+            goToSection('book-appointment');
+            // Pre-select doctor in booking form
+        }
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('appointment-date');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.min = today;
+        }
+
+        // Booking form submission
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Appointment request submitted! Waiting for doctor approval.');
+            this.reset();
+        });
+
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const section = this.dataset.section;
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(section).classList.add('active');
+                
+                const titles = {
+                    'dashboard': 'Dashboard',
+                    'doctors': 'Find Doctors',
+                    'book-appointment': 'Book Appointment',
+                    'my-appointments': 'My Appointments',
+                    'profile': 'My Profile'
+                };
+                document.getElementById('page-title').textContent = titles[section];
+            });
+        });
+
+        // Mobile menu
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('mobile-open');
+        });
+    </script>
+</body>
+</html>
